@@ -1,0 +1,33 @@
+<%= form_tag(youtube_index_path, method: "get") do %>
+  <%= label_tag(:search, "Search for video or channel:") %>
+  <%= text_field_tag(:search) %>
+  <%= submit_tag("Search") %>
+<% end %>
+<br><br>
+<div class="channel-cards">
+  <% @channels.each do |channel| %>
+    <div class="channel-card">
+      <div class="channel-card__thumbnail">
+        <img src="<%= channel.snippet.thumbnails.default.url %>" alt="<%= channel.snippet.title %> thumbnail">
+      </div>
+      <div class="channel-card__info">
+        <h3 class="channel-card__title"><%= channel.snippet.title %></h3>
+        <p class="channel-card__description"><%= channel.snippet.description %></p>
+        <div class="channel-card__stats">
+          <div class="channel-card__stat">
+            <span class="channel-card__stat-label">Subscribers:</span>
+            <span class="channel-card__stat-value"><%= channel.statistics.subscriber_count %></span>
+          </div>
+          <div class="channel-card__stat">
+            <span class="channel-card__stat-label">Videos:</span>
+            <span class="channel-card__stat-value"><%= channel.statistics.video_count %></span>
+          </div>
+          <div class="channel-card__stat">
+            <span class="channel-card__stat-label">Views:</span>
+            <span class="channel-card__stat-value"><%= channel.statistics.view_count %></span>
+          </div>
+        </div>
+      </div>
+    </div><br>
+  <% end %>
+</div>
